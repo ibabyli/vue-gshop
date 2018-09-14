@@ -9,7 +9,7 @@
 	      </div>
 	    </div>
 	    <div class="login_content">
-	      <form>
+	      <form @submit.prevent="login">
 	        <div :class="{on: loginWay}">
 	          <section class="login_message">
 	            <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
@@ -31,10 +31,11 @@
 	              <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名">
 	            </section>
 	            <section class="login_verification">
-	              <input type="tel" maxlength="8" placeholder="密码">
-	              <div class="switch_button off">
-	                <div class="switch_circle"></div>
-	                <span class="switch_text">...</span>
+	              <input type="text" maxlength="8" v-if="showPwd" placeholder="密码" v-model="pwd">
+	              <input type="password" maxlength="8" placeholder="密码" v-model="pwd" v-else>
+	              <div class="switch_button" :class="showPwd ? 'on' : 'off' " @click="showPwd=!showPwd">
+	                <div class="switch_circle" :class="{right: showPwd}"></div>
+	                <span class="switch_text">{{showPwd ? 'abc' : '...'}}</span>
 	              </div>
 	            </section>
 	            <section class="login_message">
@@ -62,12 +63,15 @@
 				computeTime: 0, //计时的时间
 				showPwd: false, //是否显示密码
 				phone: '', //手机号
+				code: '', //短线验证码
+				name: '', //用户名
+				pwd: '',//密码
 			}
 		},
 		computed: {
 			rightPhone() {
 				return /^1\d{10}$/.test(this.phone)
-			}
+			},
 		},
 		methods: {
 			getCode() {
@@ -83,10 +87,11 @@
 						}
 					}, 1000);
 				}
-				
-				
 				// 发送Ajax请求（向指定手机号发送验证码短信）
-			}
+			},
+			login() {
+				
+			},
 		}
 		
 	}
