@@ -10,7 +10,7 @@ export default function ajax(url, data = {}, type = 'GET') {
 		if(type === 'GET') {
 			// 装备url query参数数据
 			let dataStr = ''; //数据拼接字符串
-			Object.key(data).forEach(key => {
+			Object.keys(data).forEach(key => {
 				dataStr += key + '=' + data[key] + '&'
 			})
 			if(dataStr != '') {
