@@ -40,7 +40,7 @@
 	            </section>
 	            <section class="login_message">
 	              <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
-	              <img class="get_verification" src="./images/captcha.svg" alt="captcha">
+	              <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha">
 	            </section>
 	          </section>
 	        </div>
@@ -64,7 +64,7 @@
 		},
 		data() {
 			return {
-				loginWay: true, //true代表短信登陆，false代表用户密码登陆
+				loginWay: false, //true代表短信登陆，false代表用户密码登陆
 				computeTime: 0, //计时的时间
 				showPwd: false, //是否显示密码
 				phone: '', //手机号
@@ -91,6 +91,12 @@
 			closeTip() {
 				this.alertShow = false;
 				this.alertText = "";
+			},
+			
+			// 获取一个新的图片验证码
+			getCaptcha(event) {
+				// 每次指定的src要不一样
+				event.target.src = "http://localhost:4000/captcha?time=" + Date.now();
 			},
 			// 获取手机号验证码
 			getCode() {
