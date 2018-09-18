@@ -40,7 +40,7 @@
 	            </section>
 	            <section class="login_message">
 	              <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
-	              <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha">
+	              <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" @click="getCaptcha" ref="captcha">
 	            </section>
 	          </section>
 	        </div>
@@ -58,7 +58,7 @@
 
 <script>
 	import AlertTip from '../../components/AlertTip/AlertTip.vue';
-	import {reqSendCode, reqSmsLogin, rreqPwdLogin} from '../../api'
+	import {reqSendCode, reqSmsLogin, reqPwdLogin} from '../../api'
 	export default {
 		components: {
 			AlertTip,
@@ -97,7 +97,7 @@
 			// 获取一个新的图片验证码
 			getCaptcha(event) {
 				// 每次指定的src要不一样
-				event.target.src = "http://localhost:4000/captcha?time=" + Date.now();
+				this.$refs.captcha.src = "http://localhost:4000/captcha?time=" + Date.now();
 			},
 			// 异步获取短信验证码
 			async getCode() {
@@ -178,6 +178,7 @@
 					this.$router.replace('/profile')
 				} else {
 					const msg = result.msg;
+					this.getCaptcha();
 					this.showAlert(msg);
 				}
 			},
