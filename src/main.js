@@ -2,9 +2,14 @@
  * 入口JS
  */
 import Vue from 'vue'
+import {Button, Toast} from 'mint-ui'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
+// 注册全局组件标签
+Vue.component(Button.name, Button) //<mt-button>
+Vue.component(Toast.name, Toast) 
 
 new Vue ({
 	el: '#app',
