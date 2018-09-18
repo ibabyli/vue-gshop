@@ -2,12 +2,16 @@
 	<section class="msite">
 		<!--首页头部 title="昌平区北七家宏福科技园(337省道北)"-->
 		<HeaderTop :title="address.name">
-			<span class="header_search" slot="left">
-        <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-            <span class="header_login_text">登录|注册</span>
-			</span>
+			<router-link class="header_search" slot="left" to="/search">
+				<i class="iconfont icon-sousuo"></i>
+			</router-link>
+			<router-link class="header_login" slot="right" :to="userInfo._id ? '/userInfo' : '/login'">
+				<span class="header_login_text" v-if="!userInfo._id">登录|注册</span>
+				<span class="header_login_text" v-else>
+					<i class="iconfont icon-person"></i>
+				</span>
+			</router-link>
+            
 		</HeaderTop>
 		<!--首页导航-->
 		<nav class="msite_nav">
@@ -60,7 +64,7 @@
 			this.$store.dispatch('getShops')
 		},
 		computed: {
-			...mapState(['address', 'categorys']),
+			...mapState(['address', 'categorys', 'userInfo']),
 			/**
 			 * 根据categorys 一维数组生成一个二维数组
 			 * 小数组中的元素个数最大是8
