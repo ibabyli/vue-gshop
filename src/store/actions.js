@@ -7,6 +7,9 @@ import {
 	RECEIVE_SHOPS,
 	RECEIVE_USER_INFO,
 	RESET_USER_INFO,
+	RECEIVE_GOODS,
+	RECEIVE_RATINGS,
+	RECEIVE_INFO,
 } from './mutation-types'
 
 import {
@@ -14,7 +17,10 @@ import {
 	reqFoodCategorys,
 	reqShops,
 	reqUserInfo,
-	reqLogout
+	reqLogout,
+	reqShopGoods,
+	reqShopRatings,
+	reqShopInfo,
 } from '../api'
 export default {
 	// 异步获取地址
@@ -74,4 +80,35 @@ export default {
 			commit(RESET_USER_INFO);
 		}
 	},
+	// 异步获取商家信息
+	async getShopInfo({commit}) {
+		// 发送异步ajax请求
+		const result = await reqShopInfo();
+		// 提交一个mutation
+		if(result.code === 0) {
+			const info = result.data;
+			commit(RECEIVE_INFO, {info});
+		}
+	},
+	// 异步获取商家评论列表
+	async getShopRatings({commit}) {
+		// 发送异步ajax请求
+		const result = await reqShopRatings();
+		// 提交一个mutation
+		if(result.code === 0) {
+			const ratings = result.data;
+			commit(RECEIVE_RATINGS, {ratings});
+		}
+	},
+	// 异步获取商家商品列表
+	async getShopGoods({commit}) {
+		// 发送异步ajax请求
+		const result = await reqShopGoods();
+		// 提交一个mutation
+		if(result.code === 0) {
+			const goods = result.data;
+			commit(RECEIVE_GOODS, {goods});
+		}
+	},
+	
 }
