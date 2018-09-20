@@ -15,3 +15,5 @@ src
 	
 	|--App.vue						--- 应用跟组件vue
 	|-- main.js						--- 应用入口js
+	
+63ji
