@@ -101,13 +101,15 @@ export default {
 		}
 	},
 	// 异步获取商家商品列表
-	async getShopGoods({commit}) {
+	async getShopGoods({commit}, callback) {
 		// 发送异步ajax请求
 		const result = await reqShopGoods();
 		// 提交一个mutation
 		if(result.code === 0) {
 			const goods = result.data;
 			commit(RECEIVE_GOODS, {goods});
+			// 数据更新了，通知一下组件
+			callback && callback();
 		}
 	},
 	
