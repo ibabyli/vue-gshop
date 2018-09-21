@@ -19,7 +19,9 @@
             <h1 class="title">{{good.name}}</h1>
             <ul>
               <li class="food-item bottom-border-1px" v-for="(food, index) in good.foods"
-                  :key="index" @click="showFood(food)">
+                  :key="index">
+              <!--<li class="food-item bottom-border-1px" v-for="(food, index) in good.foods"
+              :key="index" @click="showFood(food)">-->
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -35,7 +37,7 @@
                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <!--<CartControl :food="food"/>-->
+                    <CartControl :food="food"/>
                   </div>
                 </div>
               </li>
@@ -53,7 +55,7 @@
 <script>
   import BScroll from 'better-scroll'
   import {mapState} from 'vuex'
-  //import CartControl from '../../../components/CartControl/CartControl.vue'
+  import CartControl from '../../../components/CartControl/CartControl.vue'
   //import Food from '../../../components/Food/Food.vue'
   //import ShopCart from '../../../components/ShopCart/ShopCart.vue'
 
@@ -160,7 +162,7 @@
     },
 
     components: {
-      //CartControl,
+      CartControl,
       //Food,
       //ShopCart
     }
