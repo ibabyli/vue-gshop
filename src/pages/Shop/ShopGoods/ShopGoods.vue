@@ -19,9 +19,7 @@
             <h1 class="title">{{good.name}}</h1>
             <ul>
               <li class="food-item bottom-border-1px" v-for="(food, index) in good.foods"
-                  :key="index">
-              <!--<li class="food-item bottom-border-1px" v-for="(food, index) in good.foods"
-              :key="index" @click="showFood(food)">-->
+              :key="index" @click="showFood(food)">
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -47,7 +45,7 @@
       </div>
       <!--<ShopCart />-->
     </div>
-    <!--<Food :food="food" ref="food"/>-->
+    <Food :food="food" ref="food"/>
   </div>
 </template>
 
@@ -56,7 +54,7 @@
   import BScroll from 'better-scroll'
   import {mapState} from 'vuex'
   import CartControl from '../../../components/CartControl/CartControl.vue'
-  //import Food from '../../../components/Food/Food.vue'
+  import Food from '../../../components/Food/Food.vue'
   //import ShopCart from '../../../components/ShopCart/ShopCart.vue'
 
 
@@ -163,7 +161,7 @@
 
     components: {
       CartControl,
-      //Food,
+      Food,
       //ShopCart
     }
   }
